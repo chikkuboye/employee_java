@@ -152,6 +152,20 @@ public class Employee {
                     break;
                 case 5:
                     System.out.println("Delete the employee ");
+                    System.out.println("Enter the emp code for deleting");
+                    empCode = sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_db", "root", "");
+                        String sql = "DELETE FROM `emplyees` WHERE `empcode`="+empCode;
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("Deleted successfully");
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+
                     break;
                 case 6:
                     System.exit(0);
