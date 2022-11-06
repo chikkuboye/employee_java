@@ -61,7 +61,7 @@ public class Employee {
                     try{
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_db","root","");
-                        String sql = "SELECT `empcode`, `empName`, `Designation`, `Salary`, `companyName`, `phoneNumber`, `EmailId`, `Password` FROM `emplyees` ";
+                        String sql = "SELECT `empcode`, `empName`, `Designation`, `Salary`, `companyName`, `phoneNumber`, `EmailId`, `Password` FROM `emplyees`";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(sql);
                         while (rs.next()){
@@ -88,10 +88,40 @@ public class Employee {
                     }
                     break;
                 case 3:
-                    System.out.println("Update the employee details");
+                    System.out.println("Search the employee details");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee_db","root","");
+                        System.out.println("Enter the name of the employee ");
+                        int emp = sc.nextInt();
+                        String sql = "SELECT `id`, `empcode`, `empName`, `Designation`, `Salary`, `companyName`, `phoneNumber`, `EmailId`, `Password` FROM `emplyees` WHERE `empcode`="+emp;
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getEmp = rs.getString("empcode");
+                            String getName = rs.getString("empName");
+                            String getDesign = rs.getString("Designation");
+                            String getSalary = rs.getString("Salary");
+                            String getCompany = rs.getString("companyName");
+                            String getphone = rs.getString("phoneNumber");
+                            String getEmail = rs.getString("EmailId");
+                            String getpass = rs.getString("Password");
+                            System.out.println("Empcode="+getEmp);
+                            System.out.println("Name="+getName);
+                            System.out.println("Designation="+getDesign);
+                            System.out.println("Salary="+getSalary);
+                            System.out.println("Company="+getCompany);
+                            System.out.println("Phone Number="+getphone);
+                            System.out.println("EmailId="+getEmail);
+                            System.out.println("Password="+getpass+'\n');
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 4:
-                    System.out.println("Search the employee ");
+                    System.out.println("Update the employee details ");
                     break;
                 case 5:
                     System.out.println("Delete the employee ");
